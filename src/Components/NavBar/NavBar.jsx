@@ -14,7 +14,7 @@ const NavBar = () => {
       <Nav.Link href="#Nostros">Nostros</Nav.Link>
       <Nav.Link href="#Contactos">Contactos</Nav.Link>
     </Nav>
-    <CartWidget />
+    <CartWidget cantidad= {2} />
     </Container>
   </Navbar>
     </div>
