@@ -6,7 +6,7 @@ const ItemCount = ({counter, incrementar, decrementar, onAdd}) => {
 
   return (
     <div>
-        <p>{counter}</p>
+      <p className='counter'>{counter}</p>
       <button onClick={incrementar}>+</button>
       <button onClick={decrementar}>-</button>
       <br />
