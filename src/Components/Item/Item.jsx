@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import ItemCount from '../ItemCount/ItemCount';
 
+
 export default function Item({product, }) {
 
  const [counter, setCounter] = useState (0)
@@ -28,21 +29,20 @@ export default function Item({product, }) {
  
   return (
     <div className='product'>
-    <Card sx={{ maxWidth: 375
+    <Card sx={{ maxWidth: 375, minHeight:750, margin:5
     }}>
       <CardMedia
         component="img"
-        height="150
-      "
+        height="450"
         image={product.image}
-        alt=""
+        alt={product.title}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {product.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {product.description}
+          <button>DETALLE</button>
         </Typography>
       </CardContent>
       <ItemCount incrementar={incrementar} decrementar={decrementar} onAdd={onAdd} counter={counter}/>

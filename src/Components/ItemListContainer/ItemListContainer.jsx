@@ -16,7 +16,7 @@ const ItemListContainer = () => {
   return (
 
     <div>
-      <div className='itemList'> <ItemList  products={products}/></div>
+      <div> <ItemList  products={products}/></div>
       
     </div>
   );
