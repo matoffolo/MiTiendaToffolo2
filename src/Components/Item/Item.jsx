@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import ItemCount from '../ItemCount/ItemCount';
+import { Link } from 'react-router-dom';
 
 
 export default function Item({product, }) {
@@ -42,7 +43,7 @@ export default function Item({product, }) {
           {product.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          <button>DETALLE</button>
+        <Link to={`/item/${product.id}`}>DETALLE</Link>
         </Typography>
       </CardContent>
       <ItemCount incrementar={incrementar} decrementar={decrementar} onAdd={onAdd} counter={counter}/>
