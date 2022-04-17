@@ -43,7 +43,7 @@ export default function Item({product, }) {
           {product.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        <Link to={`/item/${product.id}`}>DETALLE</Link>
+        <Link to={`/Item/${product.id}`}>DETALLE</Link>
         </Typography>
       </CardContent>
       <ItemCount incrementar={incrementar} decrementar={decrementar} onAdd={onAdd} counter={counter}/>

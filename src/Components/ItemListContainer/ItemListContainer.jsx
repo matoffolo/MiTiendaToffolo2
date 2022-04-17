@@ -15,7 +15,7 @@ const ItemListContainer = () => {
   useEffect(() => {
       fetch('https://fakestoreapi.com/products')
       .then(resp => resp.json())
-      .then(json =>setProducts(json));
+      .then(json =>setProducts(json));  
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
@@ -27,7 +27,8 @@ const ItemListContainer = () => {
 {isLoading ? (
 				<Spinner />
 			) : (
-      <div> <ItemList  products={products}/></div>)}
+      <div>Link <ItemList  products={products}/>
+      </div>)}
       
     </div>
   );

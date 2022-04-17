@@ -16,7 +16,7 @@ function ItemDetail({product}) {
           component="img"
           height="500"
           image={product.image}
-          alt={product.title}
+          al  t={product.title}
         />
         <CardContent>
           <Typography variant="h5" >
