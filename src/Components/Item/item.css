@@ -1,0 +1,56 @@
+.containerCards {
+    margin: 0 auto;
+    max-width: 90%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.card {
+    background-color: #fbb356e8;
+    margin: 25px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 12px 2px #4b4b4b3e;
+}
+
+.card img {
+    width: 200px;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.cardInfo {
+    padding: 10px;
+}
+
+.cardInfo h3 {
+    font-weight: 400;
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.cardInfo h4 {
+    font-weight: 300;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.cardInfo h5 {
+    background-color: #ff8000;
+    width: 90px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.cardInfo button {
+    border: 3px solid #ff8800;
+    background-color: #fed8a5e8;
+    margin: 10px 0px;
+    font-size: 16px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
