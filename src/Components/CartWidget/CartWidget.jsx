@@ -6,13 +6,13 @@ import { CartContext } from "../../CartContext/CartContext";
 
 
 
-const CartWidget = ({cantidad}) => {
-  const {cart} = useContext(CartContext)
+const CartWidget = () => {
+  const {totalItem} = useContext(CartContext)
 
   return (
     <div className='carrito'>
       <Link to= "/cart">
-      <img src={image} alt="carrito" width=" 50 px" className='imagen' /> ({cart.length})
+      <img src={image} alt="carrito" width=" 50 px" className='imagen' /> ({totalItem})
       </Link>
     </div>
   );

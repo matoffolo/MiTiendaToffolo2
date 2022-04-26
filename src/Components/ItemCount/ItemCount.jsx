@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./ItemCount.css";
 
 const ItemCount = ({ initial, stock, addCart }) => {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(initial);
 
   const add = () => {
     counter < stock && setCounter(counter + 1);
