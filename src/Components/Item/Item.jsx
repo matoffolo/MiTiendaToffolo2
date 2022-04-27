@@ -12,17 +12,17 @@ export default function Item({product}) {
  
   return (
     <div className='product'>
-    <Card sx={{ maxWidth: 375, minHeight:750, margin:5
+    <Card sx={{ maxWidth: 375, minHeight:650, margin:5, border: 10
     }}>
       <CardMedia
         component="img"
-        height="450"
-        image={product.image}
-        alt={product.title}
+        height="350"
+        image={product.img}
+        alt={product.name}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {product.title}
+        <Typography gutterBottom variant="h5" component="div"  >
+          {product.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
         <Link to={`/Item/${product.id}`}><Button>DETALLE</Button></Link>

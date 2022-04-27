@@ -27,12 +27,12 @@ function ItemDetail({ product }) {
           <CardMedia
             component="img"
             height="500"
-            image={product.image}
+            image={product.img}
             al
-            t={product.title}
+            t={product.name}
           />
           <CardContent>
-            <Typography variant="h5">{product.title}</Typography>
+            <Typography variant="h5">{product.name}</Typography>
             <Typography variant="body2" color="text.secondary">
               {product.description} 
             </Typography>
@@ -40,7 +40,7 @@ function ItemDetail({ product }) {
               ${product.price}
             </Typography>
           </CardContent>
-          {number === 0 ? <ItemCount initial={1} stock={10} addCart={addCart}/> : <Link to='/cart' ><button>Ir al carrito</button></Link>
+          {number === 0 ? <ItemCount initial={1} stock={product.stock} addCart={addCart}/> : <Link to='/cart' ><button>Ir al carrito</button></Link>
           }
         </CardActionArea>
         <CardActions></CardActions>

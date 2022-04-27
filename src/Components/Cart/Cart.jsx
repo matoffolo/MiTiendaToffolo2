@@ -16,6 +16,7 @@ if (totalItem===0){
   )
 }
 
+
   return (
     <>
     <div className='container mx-auto mt-10'>
@@ -44,7 +45,7 @@ if (totalItem===0){
               <div className='flex items-center hover:bg-gray-100 -mx-8 px-6 py-5'>
                 <div className='flex w-2/5'>
                   <div className='w-20'>
-                    <img className='h-24' src={product.image} alt='algo' />
+                    <img className='h-24' src={product.img} alt='algo' />
                   </div>
                   <div className='flex flex-col justify-between ml-4 flex-grow'>
                     <span className='font-bold text-sm'>{product.name}</span>
