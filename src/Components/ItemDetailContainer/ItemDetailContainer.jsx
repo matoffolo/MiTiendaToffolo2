@@ -7,6 +7,7 @@ import {
   getFirestore,
 } from "firebase/firestore";
 
+
 function ItemDetailContainer() {
   const [product, setProduct] = useState([]);
   let { id } = useParams();
@@ -15,7 +16,7 @@ function ItemDetailContainer() {
 
     const db = getFirestore();
 
-      const prod = doc(db, 'mitienda',id);
+      const prod = doc(db,'mitienda',id);
   
       getDoc(prod).then((res) => {
         setProduct({ id: res.id, ...res.data() });

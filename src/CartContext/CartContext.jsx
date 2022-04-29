@@ -11,10 +11,8 @@ const CartContextProvider = ({ children }) => {
     );
     if (indexProduct !== -1) {
       const newCart = [...cart];
-      console.log("newCart",newCart)
       newCart[indexProduct].cantidad = newCart[indexProduct].cantidad +
         product.cantidad;
-        console.log("newCartAfter",newCart)
       setCart(newCart);
     } else {
       setCart([...cart, product]);

@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../CartContext/CartContext';
 
+
 const Cart = () => {
-  const { cart, removeFromCart, buyAll, clear,totalItem, precioTotal} = useContext(CartContext);
+  const { cart, removeFromCart, clear,totalItem, precioTotal} = useContext(CartContext);
 
 if (totalItem===0){
   return (
@@ -144,14 +145,14 @@ if (totalItem===0){
           <div className='border-t mt-8'>
             <div className='flex font-semibold justify-between py-6 text-sm uppercase'>
               <span>Total cost</span>
-              <span>{precioTotal}</span>
+              <span>${precioTotal}</span>
             </div>
-            <button
-              onClick={buyAll}
+            <Link to='/formBuy' ><button
               className='bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full'
             >
               Buy
             </button>
+            </Link>
           </div>
         </div>
       </div>
