@@ -1,21 +1,27 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/rules-of-hooks */
-
-import React, { useState, useContext, useEffect, cloneElement} from "react";
+import React, { useState, useContext, } from "react";
 import { CartContext } from "../../CartContext/CartContext";
-import { addDoc, collection, getDocs, getFirestore,query,where } from "firebase/firestore";
+import { addDoc, collection, getFirestore,serverTimestamp} from "firebase/firestore";
+import { Modal,Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 
 
 
 function formBuy() {
-    const {cart, totalItem, precioTotal} = useContext (CartContext)
+    const {cart, totalItem, precioTotal, clear } = useContext(CartContext)
     const [buyer, setBuyer] = useState({
-        name: '',
+        nombre: '',
         apellido: '',
         email:'',
         telefono:'',
         direccion:'',
         provincia:'',
     })
+
+    const [codigo, setCodigo] = useState("")
+    
 
     const handleOnChange = (e) => {
         setBuyer({
@@ -24,31 +30,53 @@ function formBuy() {
         })
     }
 
-    const terminarCompra =(e) =>{
-        e.preventDefault()
-        let data = {
-            ...buyer,
+    const order = {
+           ...buyer,
             item: cart,
-            totalItem,
-            precioTotal
-
+            total: totalItem,
+            precio: precioTotal,
+            time:serverTimestamp()
         }
-        console.log({data})
-    }   
-useEffect(() => {
-    const db = getFirestore();
 
-    const ventasRef = collection(db, 'ventas')
-
-    addDoc(ventasRef, buyer).then(({id})=>{
-        console.log(id)
-    })
+    const terminarVenta = ()=>{
+        const db = getFirestore();
+        const ordersCollection = collection(db, "orders")
+        
+        addDoc(ordersCollection, order).then(({id})=>{
+            setCodigo(id);
+            clear()
+        })
+    }
  
-}, []);
-    
-
+        const [show, setShow] = useState(false);
+        
+        const handleClose = () => setShow(false);
+        const handleShow = () => setShow(true);
+   
   return (
     <div>
+         {codigo == "" ? null:
+     <><Button variant="primary" onClick={handleShow}>
+                 Click para conocer su numero de orden
+              </Button>
+              <Link to='/cart' ><Modal
+                  show={show}
+                  onHide={handleClose}
+                  keyboard={false}
+              >
+                      <Modal.Header closeButton>
+                          <Modal.Title>COMPRA EXITOSA</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                          Su numero de Orden es : {codigo}
+                      </Modal.Body>
+                      <Modal.Footer>
+                          <Button variant="primary" onClick={handleClose}>
+                              Close
+                          </Button>
+
+                      </Modal.Footer>
+                  </Modal></Link></>}
      <div class="hidden sm:block" aria-hidden="true">
   <div class="py-5">
     <div class="border-t border-gray-200"></div>
@@ -64,27 +92,27 @@ useEffect(() => {
       </div>
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2">
-      <form action="#" method="POST" onSubmit={terminarCompra}>
+      <form action="#" method="POST" onSubmit={(e) => { e.preventDefault(); terminarVenta(); e.target.reset() }}>
         <div class="shadow overflow-hidden sm:rounded-md">
           <div class="px-4 py-5 bg-white sm:p-6">
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-3">
                 <label for="first-name" class="block text-sm font-medium text-gray-700">NOMBRE</label>
-                <input type="text" placeholder='Agrega tu nombre' name="name" id="first-name" autocomplete="given-name" onChange={handleOnChange} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                <input name= 'nombre' onChange={handleOnChange} type="text" placeholder='Agrega tu nombre' id="first-name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
               </div>
 
               <div class="col-span-6 sm:col-span-3">
                 <label for="last-name" class="block text-sm font-medium text-gray-700">APELLIDO</label>
-                <input type="text" name="apellido" id="last-name" autocomplete="family-name" onChange={handleOnChange} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                <input name= 'apellido' onChange={handleOnChange}type="text"  id="last-name" autocomplete="family-name"  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
               </div>
 
               <div class="col-span-6 sm:col-span-4">
                 <label for="email-address" class="block text-sm font-medium text-gray-700">EMAIL</label>
-                <input type="text" name="email" id="email-address" autocomplete="email" onChange={handleOnChange} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                <input name= 'email' onChange={handleOnChange}type="text"  id="email-address" autocomplete="email"  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
               </div>
                 <div class="col-span-6 sm:col-span-4">
                 <label for="email-address" class="block text-sm font-medium text-gray-700">TELEFONO</label>
-                <input type="number" name="telefono" id="email-address" autocomplete="telefono" onChange={handleOnChange} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                <input name= 'telefono' onChange={handleOnChange}type="number"  id="email-address" autocomplete="telefono"  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
               </div>
               <div class="col-span-6 sm:col-span-3">
                 <label for="country" class="block text-sm font-medium text-gray-700">FORMA DE PAGO</label>
@@ -97,7 +125,7 @@ useEffect(() => {
 
               <div class="col-span-6">
                 <label for="street-address" class="block text-sm font-medium text-gray-700">DIRECCION</label>
-                <input type="text" name="direccion" id="street-address" autocomplete="street-address" onChange={handleOnChange} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                <input name= 'direccion' onChange={handleOnChange}type="text" id="street-address" autocomplete="street-address"  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
               </div>
 
               <div class="col-span-6 sm:col-span-6 lg:col-span-2">
@@ -107,7 +135,7 @@ useEffect(() => {
 
               <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                 <label for="region" class="block text-sm font-medium text-gray-700">PROVINCIA</label>
-                <input type="text" name="provincia" id="region" autocomplete="address-level1" onChange={handleOnChange} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+                <input type="text" name= 'provincia' onChange={handleOnChange} id="region" autocomplete="address-level1"  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
               </div>
 
               <div class="col-span-6 sm:col-span-3 lg:col-span-2">
@@ -120,12 +148,14 @@ useEffect(() => {
             <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">TERMINAR COMPRA</button>
           </div>
         </div>
-      </form>
+      </form>      
     </div>
   </div>
 </div>
-    </div>
-  );
-}
+</div>
+
+)
+};
+  
 
 export default formBuy;
